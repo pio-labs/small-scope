@@ -1,0 +1,20 @@
+<section data-ng-controller="OpportunitiesController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Opportunities</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="opportunity in opportunities" data-ng-href="#!/opportunities/{{opportunity._id}}" class="list-group-item">
+                <h4 class="list-group-item-heading" data-ng-bind="opportunity.title"></h4>
+                <small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="opportunity.created | date:'MMM dd, yyyy'"></span>
+				by
+				<span data-ng-bind="opportunity.contact_person"></span>
+			</small>
+
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!opportunities.$resolved || opportunities.length">
+    	No Opportunities yet, why don't you <a href="/#!/opportunities/create">create one</a>?
+    </div>
+</section>
