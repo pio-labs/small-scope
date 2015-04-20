@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/small-scope-dev',
+	db: process.env.MONGOLAB_URI || 'mongodb://localhost/small-scope-dev',
 	app: {
 		title: 'small-scope - Development Environment'
 	},
