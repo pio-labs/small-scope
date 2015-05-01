@@ -12,7 +12,7 @@ var mongoose = require('mongoose'),
 /**
  * Create a Movie
  */
-exports.create = function (req, res) {
+exports.create = function (req, res, next) {
     var movie = new Movie(req.body);
     movie.user = req.user;
     youtubeService.getYoutubeDetailsFromUrl(movie.youtube_url, function (youtubeDetails, err) {
@@ -37,14 +37,14 @@ exports.create = function (req, res) {
 /**
  * Show the current Movie
  */
-exports.read = function (req, res) {
+exports.read = function (req, res, next) {
     res.jsonp(req.movie);
 };
 
 /**
  * Update a Movie
  */
-exports.update = function (req, res) {
+exports.update = function (req, res, next) {
     var movie = req.movie;
 
     movie = _.extend(movie, req.body);
@@ -63,7 +63,7 @@ exports.update = function (req, res) {
 /**
  * Delete an Movie
  */
-exports.delete = function (req, res) {
+exports.delete = function (req, res, next) {
     var movie = req.movie;
 
     movie.remove(function (err) {
@@ -80,7 +80,7 @@ exports.delete = function (req, res) {
 /**
  * List of Movies
  */
-exports.list = function (req, res) {
+exports.list = function (req, res, next) {
     Movie.find().sort('-created').populate('user', 'displayName').exec(function (err, movies) {
         if (err) {
             return res.status(400).send({

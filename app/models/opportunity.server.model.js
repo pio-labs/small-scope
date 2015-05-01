@@ -31,7 +31,7 @@ var OpportunitySchema = new Schema({
     },
     roles:[{
 	   type: Schema.ObjectId,
-	   ref: "Role"
+	   ref: 'Role'
     }],
     contact_person:{
 	   type: String

@@ -8,9 +8,9 @@
 		"npm": "1.4.x"
 	},
 	"scripts": {
-		"start": "grunt",
+		"start": "export NODE_ENV=production; grunt",
 		"test": "grunt test",
-		"postinstall": "bower install --config.interactive=false"
+		"postinstall": "bower install --config.interactive=false; export NODE_ENV=development; grunt build;"
 	},
 	"dependencies": {
 		"express": "~4.10.1",
