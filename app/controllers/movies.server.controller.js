@@ -7,7 +7,11 @@ var mongoose = require('mongoose'),
     errorHandler = require('./errors.server.controller'),
     youtubeService = require('../services/youtube-service'),
     Movie = mongoose.model('Movie'),
-    _ = require('lodash');
+    Genre = mongoose.model('Genre'),
+    Language=mongoose.model('Language'),
+    _ = require('lodash'),
+    async = require('async');
+
 
 /**
  * Create a Movie
@@ -113,3 +117,28 @@ exports.hasAuthorization = function (req, res, next) {
     }
     next();
 };
+
+
+/**
+ * Movie meta info like filters genres tags etc..
+ * */
+
+
+ exports.metaIfo=function(req,res){
+
+     async.parallel(
+         {
+             genres : function(callback){
+                 Genre.find().sort('-displayName').populate('createdBy lastUpdatedBy', 'displayName').exec(callback);
+             },
+             languages : function(callback){
+                 Language.find().sort('-displayName').populate('createdBy lastUpdatedBy', 'displayName').exec(callback);
+             }
+         },function(err, result){
+
+            res.jsonp({
+                genres : result.genres,
+                languages : result.languages
+            });
+     });
+ };

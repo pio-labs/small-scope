@@ -14,6 +14,11 @@ module.exports = function(app) {
 		.put(users.requiresLogin, movies.hasAuthorization, movies.update)
 		.delete(users.requiresLogin, movies.hasAuthorization, movies.delete);
 
+    app.route('/api/movies/metadata')
+        .get(movies.metaIfo)
+        .post(movies.metaIfo);
+
 	// Finish by binding the Movie middleware
 	app.param('movieId', movies.movieByID);
+
 };
