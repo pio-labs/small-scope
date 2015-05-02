@@ -12,9 +12,9 @@ var mongoose = require('mongoose'),
 var GenreSchema = new Schema({
 	name: {
 		type: String,
-		default: '',
 		required: 'Please fill Genre name',
-		trim: true
+		trim: true,
+        unique : true
 	},
 	createdDate: {
 		type: Date,

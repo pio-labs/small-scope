@@ -15,6 +15,7 @@ var fs = require('fs'),
 	cookieParser = require('cookie-parser'),
 	helmet = require('helmet'),
 	passport = require('passport'),
+    expressValidator = require('express-validator'),
 	mongoStore = require('connect-mongo')({
 		session: session
 	}),
@@ -80,6 +81,7 @@ module.exports = function(db) {
 		extended: true
 	}));
 	app.use(bodyParser.json());
+    app.use(expressValidator());
 	app.use(methodOverride());
 
 	// CookieParser should be above session
