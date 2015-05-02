@@ -10,7 +10,7 @@ module.exports = {
 			],
 			js: [
 				// TODO(Prakash): Either write a merge task in grunt and move the merged to CDN or use individuals from CDN
-				'public/lib/underscore/underscore-min.js',
+				'public/lib/lodash/lodash.min.js',
 				'public/lib/angular/angular.min.js',
 				'public/lib/angular-resource/angular-resource.js', 
 				'public/lib/angular-cookies/angular-cookies.js', 

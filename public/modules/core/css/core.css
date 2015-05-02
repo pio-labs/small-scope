@@ -1,3 +1,8 @@
+body{
+	font-family: 'PT Sans', Helvetica;
+	background-image: url('/modules/core/img/bg.jpg');
+}
+
 .content {
 	margin-top: 50px;
 }

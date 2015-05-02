@@ -38,6 +38,30 @@ angular.module('movies').controller('MoviesController', ['$scope', '$stateParams
 			}
 		};
 
+		$scope.getThumbnail = function(movie, retina){
+			var thumbnails = movie.youtubeDetails.snippet.thumbnails;
+			if(retina){
+				if(thumbnails.standard){
+					return thumbnails.standard.url;
+				}
+			}
+			if(thumbnails.medium){
+				return thumbnails.medium.url;
+			}
+
+			if(thumbnails.standard){
+				return thumbnails.standard.url;
+			}
+
+			if(thumbnails.default){
+				return thumbnails.default.url;
+			}
+		};
+
+		$scope.getDescription = function(movie){
+			return movie.description || movie.youtubeDetails.snippet.description;
+		};
+
 		// Update existing Movie
 		$scope.update = function() {
 			var movie = $scope.movie;

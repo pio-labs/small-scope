@@ -17,7 +17,7 @@ module.exports = {
                 'public/lib/bootstrap/dist/css/bootstrap-theme.css',
             ],
             js: [
-                'public/lib/underscore/underscore-min.js',
+                'public/lib/lodash/lodash.min.js',
                 'public/lib/angular/angular.js',
                 'public/lib/angular-resource/angular-resource.js',
                 'public/lib/angular-cookies/angular-cookies.js',

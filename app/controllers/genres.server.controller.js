@@ -7,7 +7,7 @@ var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Genre = mongoose.model('Genre'),
 	_ = require('lodash'),
-    commonUtil=require("../util/common.server.util");
+    commonUtil=require('../util/common.server.util');
 
 /**
  * Create a Genre

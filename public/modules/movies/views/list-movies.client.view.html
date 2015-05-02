@@ -2,18 +2,42 @@
     <div class="page-header">
         <h1>Movies</h1>
     </div>
-    <div class="list-group">
-        <a data-ng-repeat="movie in movies" data-ng-href="#!/movies/{{movie._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="movie.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="movie.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="movie.title"></h4>
-        </a>
+
+    <div class="row">
+        <div class="col-sm-4 col-md-3" data-ng-repeat="movie in movies">
+
+            <div class="movie box">
+                <a data-ng-href="#!/movies/{{movie._id}}" class="thumb">
+                    <img data-ng-src="{{getThumbnail(movie)}}" alt="" class="img-responsive"/>
+                </a>
+
+                <div class="box-body">
+                    <a data-ng-href="#!/movies/{{movie._id}}">
+                        <h3 class="header">
+                            {{movie.title | lowercase}}
+                        </h3>
+                    </a>
+
+                    <p class="movie-info">
+                        {{getDescription(movie) | limitTo:100}}
+                    </p>
+                    <a data-ng-href="#!/movies/{{movie._id}}" class="read-more">
+                        Read More
+                    </a>
+                </div>
+                <div class="box-footer">
+                    <ul class="list-inline filters">
+                        <li><a data-ng-href="#!/movies/tags/music">Music</a></li>
+                        <li><a data-ng-href="#!/movies/tags/social">Social</a></li>
+                    </ul>
+                </div>
+            </div>
+            </a>
+        </div>
     </div>
+
+
     <div class="alert alert-warning text-center" data-ng-hide="!movies.$resolved || movies.length">
-    	No Movies yet, why don't you <a href="/#!/movies/create">create one</a>?
+        No Movies yet, why don't you <a href="/#!/movies/create">create one</a>?
     </div>
 </section>
