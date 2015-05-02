@@ -7,7 +7,7 @@ module.exports = function(app) {
 	// Movies Routes
 	app.route('/movies')
 		.get(movies.list)
-		.post(users.requiresLogin, movies.create);
+		.post(movies.create);
 
 	app.route('/movies/:movieId')
 		.get(movies.read)
