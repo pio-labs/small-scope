@@ -54,3 +54,27 @@ exports.update = function(req, res) {
 exports.me = function(req, res) {
 	res.json(req.user || null);
 };
+
+exports.updatePreferences = function(req, res, next){
+	// Init Variables
+	var user = req.user;
+
+	// For security measurement we remove the roles from the req.body object
+	var preferenceUpdates = {
+		genres : req.body.genres,
+		languages : req.body.languages,
+		like_documentaries: req.body.like_documentaries
+	};
+
+	if (user) {
+		user.preferences = preferenceUpdates;
+		user.save(function(err){
+			if(err){
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+				});
+			}
+			res.json(user);
+		});
+	}
+};
