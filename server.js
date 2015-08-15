@@ -20,6 +20,7 @@ var db = mongoose.connect(config.db, function(err) {
 		console.error(chalk.red('Could not connect to MongoDB!'));
 		console.log(chalk.red(err));
 	}
+	require('./config/init-db-setup.js');
 });
 
 // Init the express application

@@ -1,0 +1,41 @@
+[
+  {
+    "name": "Animation"
+  },
+  {
+    "name": "Adventure"
+  },
+  {
+    "name": "Comedy"
+  },
+  {
+    "name": "Crime"
+  },
+  {
+    "name": "Fantasy"
+  },
+  {
+    "name": "Historical"
+  },
+  {
+    "name": "Fiction"
+  },
+  {
+    "name": "Horror"
+  },
+  {
+    "name": "Mystery"
+  },
+  {
+    "name": "Political"
+  },
+  {
+    "name": "Romance"
+  },
+  {
+    "name": "Satire"
+  },
+  {
+    "name": "Slice of Life"
+  }
+]
