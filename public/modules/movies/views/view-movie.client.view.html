@@ -1,7 +1,5 @@
 <section data-ng-controller="MoviesController" data-ng-init="findOne()">
-	<div class="page-header">
-		<h1 data-ng-bind="movie.title"></h1>
-	</div>
+
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == movie.user._id))">
 		<a class="btn btn-primary" href="/#!/movies/{{movie._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
@@ -10,12 +8,41 @@
 			<i class="glyphicon glyphicon-trash"></i>
 		</a>
 	</div>
-	<small>
-		<em class="text-muted">
-			Posted on
-			<span data-ng-bind="movie.created | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="movie.user.displayName"></span>
-		</em>
-	</small>
+	<div class="page-header clearfix hr-bottom">
+		<h1 data-ng-bind="movie.title" ></h1>
+	</div>
+	<section class="voting-section text-center">
+		<div class="btn btn-success col-xs-12" ng-click="voteMovie(1, userVote)">
+			<span class="glyphicon glyphicon-thumbs-up" ng-class="{'active': userVote == 1}"></span>
+			<div>{{movie.upVotes}}</div>
+		</div>
+		<br/>
+		<div class="btn btn-danger col-xs-12" ng-click="voteMovie(-1, userVote)">
+			<span class="glyphicon glyphicon-thumbs-down" ng-class="{'active': userVote == -1}"></span>
+			<div>{{movie.downVotes}}</div>
+		</div>
+	</section>
+
+	<div class="embed-responsive embed-responsive-16by9" ng-if="movie.embedUrl">
+		<iframe class="embed-responsive-item" ng-src="{{trustSrc(movie.embedUrl)}}"></iframe>
+	</div>
+	<br/>
+	<section class="movie-details">
+		<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == movie.user._id))"></div>
+		<table>
+			<tr>
+				<td width="150px">Title</td>
+				<td ng-bind="movie.title"></td>
+			</tr>
+			<tr>
+				<td width="30%">Title</td>
+				<td ng-bind="movie.title"></td>
+			</tr>
+		</table>
+	</section>
+
+	<section class="manage-crew">
+		<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == movie.user._id))"></div>
+		<h3 class="section-header">Cast</h3>
+	</section>
 </section>

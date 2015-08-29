@@ -51,3 +51,25 @@
 .movie .filters li a{
     color: #787878;
 }
+
+.voting-section {
+    float: left;
+    width: 8%;
+    min-width: 70px;
+    max-width: 120px;
+    margin-top: 50px;
+    margin-right: 10px;
+}
+.voting-section > div.btn{
+    font-size: 1.4em;
+    margin-bottom: 15px;
+}
+
+.hr-bottom{
+    border-bottom: 1px solid #ccc;
+}
+
+.hr-top{
+    border-top: 1px solid #ccc;
+}
+

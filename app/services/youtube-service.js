@@ -29,59 +29,52 @@ var getSnippet = function (videoId, callback) {
 
     var data = '';
     https.get(url, function (res) {
-        console.log('STATUS: ' + res.statusCode);
-        console.log('HEADERS: ' + JSON.stringify(res.headers));
-        console.log('resp: ' + res);
         res.on('data', function (chunk) {
-//			console.log('########### from  on event BODY: ' + chunk);
             data += chunk;
-
         });
         res.on('end', function () {
-//			console.log('$$$$$$$$$$ From End BODY: ' + data);
-            callback(JSON.parse(data), null);
+            callback(null, JSON.parse(data));
         });
-
     });
 };
 
 var getContentDetails = function (videoId, callback) {
     var url = BASE_URL + '?key=' + KEY + '&part=' + PARTS.CONTENTDETAILS + '&id=' + videoId;
     https.get(url, function (res) {
-        console.log('STATUS: ' + res.statusCode);
-        console.log('HEADERS: ' + JSON.stringify(res.headers));
-        console.log('resp: ' + res);
         var data = '';
         res.on('data', function (chunk) {
-//			console.log('########### from  on event BODY: ' + chunk);
             data += chunk;
         });
         res.on('end', function () {
-//			console.log('$$$$$$$$$$ From End BODY: ' + data);
-            callback(JSON.parse(data), null);
+            callback(null, JSON.parse(data));
         });
     });
 };
 
 var getYoutubeDetailsFromVideoId = function (videoId, callback) {
-    if (!videoId) return;
-    getSnippet(videoId, function (data, err) {
-        if (err) callback(null, err);
+    if (!videoId){
+        return callback(new Error('No Video Id'));
+    }
+    getSnippet(videoId, function (err, data) {
+        if (err) callback(err);
         var snippet = data.items[0].snippet;
-        getContentDetails(videoId, function (data, err) {
-            if (err) callback(data, err);
-            var youtubeDetails = {};
-            youtubeDetails.contentDetails = data.items[0].contentDetails;
-            youtubeDetails.snippet = snippet;
-            youtubeDetails.id = videoId;
-            callback(youtubeDetails, null);
+        getContentDetails(videoId, function (err, data) {
+            if (err){
+                return callback(err);
+            }
+
+            var youtubeDetails = {
+                contentDetails : data.items[0].contentDetails,
+                snippet: snippet,
+                id: videoId
+            };
+            callback(null, youtubeDetails);
         });
     });
 };
 
 var getYoutubeDetailsFromUrl = function (url, callback) {
     var videoId = getVideoIdFromUrl(url);
-    if (!videoId) return;
     getYoutubeDetailsFromVideoId(videoId, callback);
 };
 

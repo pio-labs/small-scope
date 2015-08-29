@@ -1,50 +1,72 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    schemaTypes = require('../utils/schema-types'),
+    modelReferences = require('../utils/model-references'),
+    _ = require('lodash'),
+    movieStates = require('../lib/enums/movie-states');
 
-/**
- * Movie Schema
- */
+var MovieCrewSchema = new Schema({
+    role: schemaTypes.STRING,
+    name: schemaTypes.STRING,
+    //user: modelReferences.USER,
+    rolePriority: schemaTypes.NUMBER
+});
+
 var MovieSchema = new Schema({
+    title: schemaTypes.STRING,
+    description: schemaTypes.STRING,
+    user: modelReferences.USER,
 
-    user: {
-        type: Schema.ObjectId,
-        ref: 'User'
-    },
     code :{
         type : String,
         unique : true,
         lowercase : true
     },
-    title: {type: String, required: true},
-    language: {type: String, required: true},
-    genre: {type: String, required: true},
-    release_date: {type: Date},
-    story_line: {type: String},
-    cast: [String],
-    director: [String],
-    writer:  [String],
-    dialogues: [String],
-    screen_play: [String],
-    music: [String],
-    editing: [String],
-    effects: [String],
-    producer: [String],
-    cinematography: [String],
-    production_house: [String],
-    awards: [String],
-    recognitions: [String],
-    up_votes: {type: Number, default: 0},
-    down_votes: {type: Number, default: 0},
-    view_count: {type: Number, default: 0},
-    youtube_url: {type: String, unique : true},
+
+    languages: [schemaTypes.STRING],
+    genres: [schemaTypes.STRING],
+
+    releaseDate : schemaTypes.OPTIONAL_DATE,
+
+    crew: [MovieCrewSchema],
+
+    awards: [schemaTypes.OPTIONAL_STRING],
+    recognitions: [schemaTypes.OPTIONAL_STRING],
+    upVotes: schemaTypes.NUMBER,
+    downVotes: schemaTypes.NUMBER,
+    viewCount: schemaTypes.NUMBER,
+    youtubeUrl: schemaTypes.OPTIONAL_STRING,
     facebook_url: {type: String},
+    youtubeDetails: {},
     youtube_details: {},
-    tags : [String]
+    tags : [String],
+
+    status: _.defaults({enum: movieStates.getAll()}, schemaTypes.OPTIONAL_STRING),
+
+
+    approved: schemaTypes.BOOLEAN,
+    approvedBy : {
+        user: modelReferences.USER,
+        date: schemaTypes.OPTIONAL_DATE
+    },
+
+    // Who fields
+    created: {
+        user: modelReferences.USER,
+        date: schemaTypes.DATE
+    },
+    updated: {
+        user: modelReferences.USER,
+        date: schemaTypes.OPTIONAL_DATE
+    },
+
+    deleted: schemaTypes.BOOLEAN,
+    deletedBy: {
+        user: modelReferences.USER,
+        date: schemaTypes.OPTIONAL_DATE
+    }
 });
 
 mongoose.model('Movie', MovieSchema);

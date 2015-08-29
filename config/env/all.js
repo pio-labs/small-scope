@@ -14,7 +14,6 @@ module.exports = {
         lib: {
             css: [
                 'public/lib/bootstrap/dist/css/bootstrap.css',
-                'public/lib/bootstrap/dist/css/bootstrap-theme.css',
             ],
             js: [
                 'public/lib/lodash/lodash.min.js',

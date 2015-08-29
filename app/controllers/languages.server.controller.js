@@ -7,7 +7,7 @@ var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Language = mongoose.model('Language'),
 	_ = require('lodash'),
-    commonUtil=require('../util/common.server.util');
+    commonUtil=require('../utils/common.server.util');
 /**
  * Create a Language
  */

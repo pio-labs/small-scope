@@ -2,7 +2,7 @@
 	<div class="page-header">
 		<h1>New Movie</h1>
 	</div>
-	<div class="col-md-12">
+	<div class="col-sm-10 col-sm-offset-1">
 		<div class="row well bs-component">
 			<form ng-submit="create()"
 			      class="form-horizontal ng-pristine ng-invalid ng-invalid-required ng-valid-url">
@@ -10,193 +10,72 @@
 					<div class="col-md-2">Add Movie</div>
 					<div class="col-md-8"><p class="text-info ng-binding"></p></div>
 				</legend>
-				<div class="col-md-6">
-					<fieldset>
-						<div class="form-group"><label for="movieTitle"
-						                               class="col-sm-4 control-label">Title</label>
-
-							<div class="col-sm-8"><input id="movieTitle" type="text" required=""
-							                             placeholder="Title" name="title" ng-model="movie.title"
-							                             class="form-control">
-							</div>
+				<fieldset>
+					<div class="form-group">
+						<label for="movieTitle" class="col-sm-3 control-label">Title</label>
+						<div class="col-sm-8">
+							<input id="movieTitle" type="text" required="" class="form-control" name="title"
+							       placeholder="Title" ng-model="movie.title">
 						</div>
-						<div class="form-group"><label for="language"
-						                               class="col-sm-4 control-label">Language</label>
-
-							<div class="col-sm-6"><select id="language" ng-model="movie.language" required=""
-							                              class="form-control">
-								<option value="English">English</option>
-								<option value="Telugu">Telugu</option>
-								<option value="Hindi">Hindi</option>
-								<option value="Tamil">Tamil</option>
-								<option value="Kannada">Kannada</option>
-								<option value="Malayalam">Malayalam</option>
-								<option value="Others">Others</option>
-							</select></div>
+					</div>
+					<div class="form-group">
+						<label for="storyLine" class="col-sm-3 control-label">Story Line</label>
+						<div class="col-sm-8">
+								<textarea id="storyLine" placeholder="Story Line" name="storyLine"
+								          ng-model="movie.description" class="form-control"></textarea>
 						</div>
-						<div class="form-group"><label for="genre" class="col-sm-4 control-label">Genre</label>
+					</div>
+					<div class="form-group">
+						<label for="language" class="col-sm-3 control-label">Language</label>
 
-							<div class="col-sm-6"><select id="genre" name="genre" multiple="true"
-							                              ng-model="movie.genre" required=""
-							                              class="form-control">
-								<option value="Action">Action</option>
-								<option value="Adventure">Adventure</option>
-								<option value="Animation">Animation</option>
-								<option value="Comedy">Comedy</option>
-								<option value="Crime">Crime</option>
-								<option value="Documentary">Documentary</option>
-								<option value="Drama">Drama</option>
-								<option value="Entertainment">Entertainment</option>
-								<option value="Fantasy">Fantasy</option>
-								<option value="Horror">Horror</option>
-								<option value="Romance">Romance</option>
-								<option value="Sci-Fi">Sci-Fi</option>
-								<option value="Thriller">Thriller</option>
-							</select></div>
+						<div class="col-sm-8">
+							<select id="language" ng-model="movie.language" required="" class="form-control"
+							        ng-options="language.name for language in metaInfo.languages"></select>
 						</div>
-						<div class="form-group"><label for="teaserUrl"
-						                               class="col-sm-4 control-label">Teaser</label>
-
-							<div class="col-sm-8"><input id="teaserUrl" type="url" placeholder="Teaser Url"
-							                             name="teaserUrl" ng-model="movie.teaser_url"
-							                             class="form-control">
-							</div>
+					</div>
+					<div class="form-group">
+						<label for="genre" class="col-sm-3 control-label">Genre</label>
+						<div class="col-sm-8">
+							<select id='genre' name="genre" ng-model="movie.genre" class="form-control"
+							        multiple required ng-options="genre.name for genre in metaInfo.genres"></select>
 						</div>
-						<div class="form-group"><label for="youtubeUrl"
-						                               class="col-sm-4 control-label">Youtube</label>
-
-							<div class="col-sm-8"><input id="youtubeUrl" type="url" placeholder="Youtube Url"
-							                             name="youtubeUrl" ng-model="movie.youtube_url"
-							                             required=""
-							                             class="form-control">
-							</div>
+					</div>
+					<div class="form-group">
+						<label for="releaseDate" class="col-sm-3 control-label">Release Date</label>
+						<div class="col-sm-8">
+							<input id="releaseDate" type="date" placeholder="Release Date"
+							       name="releaseDate" ng-model="movie.releaseDate" class="form-control">
 						</div>
-						<div class="form-group"><label for="facebookUrl"
-						                               class="col-sm-4 control-label">Facebook</label>
-
-							<div class="col-sm-8"><input id="facebookUrl" type="url" placeholder="Facebook Url"
-							                             name="facebookUrl" ng-model="movie.facebook_url"
-							                             class="form-control">
-							</div>
+					</div>
+					<div class="form-group">
+						<label for="movieStatus" class="col-sm-3 control-label">Status</label>
+						<div class="col-sm-8">
+							<select id='movieStatus' name="Status" ng-model="movie.status" class="form-control"
+							        required ng-options="state for state in metaInfo.states"></select>
 						</div>
-						<div class="form-group"><label for="releaseDate" class="col-sm-4 control-label">Relase
-							Date</label>
-
-							<div class="col-sm-8"><input id="releaseDate" type="date" placeholder="Release Date"
-							                             name="releaseDate" ng-model="movie.release_date"
-							                             class="form-control">
-							</div>
+					</div>
+					<div class="form-group">
+						<label for="youtubeUrl" class="col-sm-3 control-label">Youtube</label>
+						<div class="col-sm-8">
+							<input id="youtubeUrl" type="url" placeholder="Youtube Url" name="youtubeUrl"
+							       required ng-model="movie.youtubeUrl" class="form-control">
 						</div>
-						<div class="form-group"><label for="storyLine" class="col-sm-4 control-label">Story
-							Line</label>
-
-							<div class="col-sm-8"><textarea id="storyLine" placeholder="Story Line"
-							                                name="storyLine" ng-model="movie.story_line"
-							                                class="form-control"></textarea>
-							</div>
+					</div>
+					<div class="form-group">
+						<label for="tags" class="col-sm-3 control-label">Tags</label>
+						<div class="col-sm-8">
+							<input id="tags" type="text" required="" class="form-control" name="tags"
+							       placeholder="Title" ng-model="movie.tags">
+							<i class="text-muted">Comma separated words</i>
 						</div>
-					</fieldset>
-				</div>
-				<div class="col-md-6">
-					<fieldset>
-						<div class="form-group"><label for="cast" class="col-sm-4 control-label">Cast</label>
-
-							<div class="col-sm-8"><input id="cast" type="text" placeholder="Cast" name="cast"
-							                             ng-model="movie.cast"
-							                             class="form-control">
-							</div>
-						</div>
-						<div class="form-group"><label for="director"
-						                               class="col-sm-4 control-label">Director</label>
-
-							<div class="col-sm-8"><input id="director" type="text" placeholder="Director"
-							                             name="director" ng-model="movie.director"
-							                             class="form-control">
-							</div>
-						</div>
-						<div class="form-group"><label for="writer" class="col-sm-4 control-label">Writer</label>
-
-							<div class="col-sm-8"><input id="writer" type="text" placeholder="Writer"
-							                             name="writer" ng-model="movie.writer"
-							                             class="form-control">
-							</div>
-						</div>
-						<div class="form-group"><label for="dialogues"
-						                               class="col-sm-4 control-label">Dialogues</label>
-
-							<div class="col-sm-8"><input id="dialogues" type="text" placeholder="Dialogues"
-							                             name="dialogues" ng-model="movie.dialogues"
-							                             class="form-control">
-							</div>
-						</div>
-						<div class="form-group"><label for="screenPlay" class="col-sm-4 control-label">Screen
-							Play</label>
-
-							<div class="col-sm-8"><input id="screenPlay" type="text" placeholder="Screen Play"
-							                             name="screenPlay" ng-model="movie.screen_play"
-							                             class="form-control">
-							</div>
-						</div>
-						<div class="form-group"><label for="music" class="col-sm-4 control-label">Music</label>
-
-							<div class="col-sm-8"><input id="music" type="text" placeholder="Music" name="music"
-							                             ng-model="movie.music"
-							                             class="form-control">
-							</div>
-						</div>
-						<div class="form-group"><label for="editing"
-						                               class="col-sm-4 control-label">Editing</label>
-
-							<div class="col-sm-8"><input id="editing" type="text" placeholder="Editing"
-							                             name="editing" ng-model="movie.editing"
-							                             class="form-control">
-							</div>
-						</div>
-						<div class="form-group"><label for="effects"
-						                               class="col-sm-4 control-label">Effects</label>
-
-							<div class="col-sm-8"><input id="effects" type="text" placeholder="Effects"
-							                             name="effects" ng-model="movie.effects"
-							                             class="form-control">
-							</div>
-						</div>
-						<div class="form-group"><label for="cinematographer" class="col-sm-4 control-label">Cinematographer</label>
-
-							<div class="col-sm-8"><input id="cinematographer" type="text"
-							                             placeholder="Cinematographer"
-							                             name="Cinematographer" ng-model="movie.cinematography"
-							                             class="form-control">
-							</div>
-						</div>
-						<div class="form-group"><label for="producer" class="col-sm-4 control-label">Producer</label>
-
-							<div class="col-sm-8"><input id="producer" type="text" placeholder="Producer"
-							                             name="producer" ng-model="movie.producer"
-							                             class="form-control">
-							</div>
-						</div>
-						<div class="form-group"><label for="awards"
-						                               class="col-sm-4 control-label">Awards</label>
-
-							<div class="col-sm-8"><input id="awards" type="text" placeholder="Awards"
-							                             name="awards" ng-model="movie.awards"
-							                             class="form-control">
-							</div>
-						</div>
-						<div class="form-group"><label for="tags"
-						                               class="col-sm-4 control-label">Tags</label>
-
-							<div class="col-sm-8"><input id="tags" type="text" placeholder="tags"
-							                             name="tags" ng-model="movie.tags"
-							                             class="form-control">
-							</div>
-						</div>
-					</fieldset>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-10"></div>
-					<div class="col-sm-2">
-						<button id="submit" type="submit" class="form-control btn btn-default">Add</button>
+					</div>
+				</fieldset>
+				<div class="form-group clearfix">
+					<div class="col-sm-2 pull-right">
+						<button id="submit" type="submit" class="form-control btn btn-success">Create Movie</button>
+					</div>
+					<div class="col-sm-2 pull-right">
+						<button id="reset" type="reset" class="form-control btn btn-danger">Reset</button>
 					</div>
 				</div>
 			</form>
