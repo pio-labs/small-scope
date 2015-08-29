@@ -5,7 +5,9 @@ angular.module('movies').controller('MoviesController',
 	['$scope', '$stateParams', '$location', '$sce', 'MovieFields', 'Authentication', 'Movies', 'MovieVotes', '$state', 'Users',
 		function ($scope, $stateParams, $location, $sce, MovieFields, Authentication, Movies, MovieVotes, $state, Users) {
 			$scope.authentication = Authentication;
-
+			$scope.users = [];
+			$scope.newCrew = {};
+			$scope.movieCrew = [];
 			// Create new Movie
 			$scope.create = function () {
 				// Create new Movie object
@@ -87,8 +89,17 @@ angular.module('movies').controller('MoviesController',
 			$scope.trustSrc = function (src) {
 				return $sce.trustAsResourceUrl(src);
 			};
+			$scope.initCrew = function(){
+				$scope.findOne(function(){
+					$scope.movieCrew = _.clone($scope.movie.crew);
+				});
+				$scope.users = Users.query();
+			};
+
 			// Find existing Movie
-			$scope.findOne = function () {
+			$scope.findOne = function (callback) {
+				if($scope.movie && $scope.movie._id) return callback();
+
 				$scope.movie = Movies.get({
 					movieId: $stateParams.movieId
 				}, function () {
@@ -104,7 +115,9 @@ angular.module('movies').controller('MoviesController',
 						});
 					}
 					$scope.movie.embedUrl = "http://www.youtube.com/embed/" + youtubeId;
+					callback();
 				});
+
 			};
 
 			if($scope.authentication.user){
@@ -123,8 +136,18 @@ angular.module('movies').controller('MoviesController',
 				}
 			};
 
-			$scope.getAllUsers = function(){
-				$scope.users = Users.query();
-			}
+			$scope.addCrew = function () {
+				$scope.movieCrew.push($scope.newCrew);
+				$scope.newCrew = {};
+				return false;
+			};
+
+			$scope.deleteCrew = function (crewMember) {
+				_.remove($scope.movieCrew, crewMember);
+			};
+
+			$scope.updateUser = function () {
+				Movies.update({movieId: $scope.movie._id}, {crew: $scope.movieCrew});
+			};
 		}
 	]);

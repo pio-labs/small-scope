@@ -15,7 +15,8 @@ var mongoose = require('mongoose'),
 
 	errorHandler = require('../errors.server.controller'),
 	youtubeService = require('../../services/youtube-service'),
-	movieStates = require('../../lib/enums/movie-states');
+	movieStates = require('../../lib/enums/movie-states'),
+	crewTypes = require('../../lib/enums/crew-type');
 
 /**
  * Create a Movie
@@ -102,12 +103,21 @@ exports.update = function (req, res, next) {
 	var movie = req.movie;
 
 	movie = _.extend(movie, req.body);
+	if(req.body.crew){
+		movie.crew  = _.map(req.body.crew, function(crew){
+			crew.user = crew.user._id;
+			return crew
+		});
+	}
+
 	movie.updated = {
 		user: req.user,
 		date: Date()
 	};
+
 	movie.save(function (err) {
 		if (err) {
+
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
@@ -157,7 +167,7 @@ exports.list = function (req, res, next) {
  * Movie middleware
  */
 exports.movieByID = function (req, res, next, id) {
-	Movie.findOne({_id: id, deleted: {$ne: true}}).populate('user', 'displayName').exec(function (err, movie) {
+	Movie.findOne({_id: id, deleted: {$ne: true}}).populate('user', 'displayName').populate('crew.user', 'displayName').exec(function (err, movie) {
 		if (err) return next(err);
 		if (!movie) return next(new Error('Failed to load Movie ' + id));
 		req.movie = movie;
@@ -180,7 +190,6 @@ exports.hasAuthorization = function (req, res, next) {
  * Movie meta info like filters genres tags etc..
  * */
 
-
 exports.metaInfo = function (req, res, next) {
 	async.parallel(
 		{
@@ -195,6 +204,9 @@ exports.metaInfo = function (req, res, next) {
 			},
 			tags: function (callback) {
 				Tag.find().sort('-name').exec(callback);
+			},
+			crewTypes: function(callback){
+				callback(null, crewTypes.getAll())
 			}
 		}, function (err, result) {
 			if (err) {
@@ -202,6 +214,15 @@ exports.metaInfo = function (req, res, next) {
 			}
 			res.jsonp(result);
 		});
+};
+
+exports.getMoviesOfUser = function (req, res, next) {
+	Movie.find({"created.user": req.user._id}).select('title description tags youtubeDetails releaseDate').exec(function (err, movies) {
+		if(err){
+			return next(err);
+		}
+		res.json(movies);
+	});
 };
 
 exports.getUserVote = function (req, res, next) {

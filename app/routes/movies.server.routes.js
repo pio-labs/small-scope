@@ -19,6 +19,9 @@ module.exports = function (app) {
 		.post(users.requiresLogin, movies.hasAuthorization, movies.updateCrew)
 		.delete(users.requiresLogin, movies.hasAuthorization, movies.deleteCrew);
 
+	app.route('/api/movies/user/:userId')
+		.get(movies.getMoviesOfUser);
+
 	app.route('/api/movies/fields')
 		.get(movies.metaInfo);
 

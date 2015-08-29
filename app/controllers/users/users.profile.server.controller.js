@@ -55,6 +55,15 @@ exports.me = function(req, res) {
 	res.json(req.user || null);
 };
 
+exports.getAll = function(req, res, next){
+	User.find({}).select('displayName').find(function(err, users){
+		if(err){
+			return next(err);
+		}
+		res.json(users);
+	});
+};
+
 exports.updatePreferences = function(req, res, next){
 	// Init Variables
 	var user = req.user;

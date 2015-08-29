@@ -1,13 +1,43 @@
-<section data-ng-controller="MoviesController" ng-init="getAllUsers()">
-	<div class="pull-right white-box" data-ng-show="((authentication.user) && (authentication.user._id == movie.user._id))">
-		<form class="form-inline">
-			<ui-select ng-model="controller.region" theme="select2" style="width: 100%;" on-select="controller.getData()">
-				<ui-select-match placeholder="Select a user ...">{{$select.selected.name}}</ui-select-match>
-				<ui-select-choices repeat="region in controller.regions | propsFilter: {name:$select.search}" >
-					<span ng-bind-html="region.name | highlight: $select.search"></span>
-				</ui-select-choices>
-			</ui-select>
-		</form>
-	</div>
+<section data-ng-controller="MoviesController" ng-init="initCrew()">
 
+	<section class="white-box clearfix new-crew-addition">
+		<h4>Add a Crew member</h4>
+		<form ng-submit="addCrew()">
+			<div class="col-sm-4">
+				<ui-select ng-model="newCrew.user" theme="select2" style="width: 100%;"
+				           on-select="logUser()">
+					<ui-select-match placeholder="Select a user ...">{{$select.selected.displayName}}
+					</ui-select-match>
+					<ui-select-choices repeat="user in users">
+						<span ng-bind-html="user.displayName | highlight: $select.search"></span>
+					</ui-select-choices>
+				</ui-select>
+			</div>
+			<div class="col-sm-4">
+				<select class="form-control" ng-model="newCrew.role" ng-options="crewType for crewType in metaInfo.crewTypes"></select>
+			</div>
+			<div class="col-sm-4">
+				<button class="btn btn-primary">Add Crew</button>
+			</div>
+		</form>
+	</section>
+
+	<section class="white-box">
+		<h4>Crew members</h4>
+		<table class="table table-bordered table-striped">
+			<tr ng-repeat="crewMember in movieCrew">
+				<td><span ng-bind="crewMember.user.displayName"></span></td>
+				<td ng-bind="crewMember.role"></td>
+				<td>
+					<button ng-click="deleteCrew(crewMember)" class="btn btn-danger">
+						<span class="glyphicon glyphicon-trash"></span>
+					</button>
+				</td>
+			</tr>
+		</table>
+	</section>
+	<section class="white-box clearfix">
+		<button class="btn btn-primary" ng-click="updateUser()">Save</button>
+		<button class="btn btn-danger">Reset</button>
+	</section>
 </section>

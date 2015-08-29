@@ -21,4 +21,10 @@ angular.module('movies').factory('Movies', ['$resource',
 			method: 'PUT'
 		}
 	});
+}]).factory('MovieService', ['$http', function ($http) {
+	return {
+		getUserMovies : function(userId){
+			return $http.get('/movies/user/'+userId);
+		}
+	}
 }]);

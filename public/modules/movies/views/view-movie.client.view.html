@@ -39,10 +39,10 @@
 		</div>
 
 		<h4>Contributors</h4>
-		<table>
+		<table class="table">
 			<tr ng-repeat="person in movie.crew">
-				<td>{{person.role || uppercase}}</td>
-				<td><a ng-href="#!/users/{{person.user._id}}">{{person.user.name}}</a></td>
+				<td width="25%"><b>{{person.role | uppercase}}</b></td>
+				<td><a ng-href="#!/users/{{person.user._id}}">{{person.user.displayName}}</a></td>
 			</tr>
 		</table>
 	</section>
