@@ -14,6 +14,8 @@ module.exports = {
         lib: {
             css: [
                 'public/lib/bootstrap/dist/css/bootstrap.css',
+                'public/lib/angular-ui-select/dist/select.min.css',
+                'public/lib/select2/select2.css'
             ],
             js: [
                 'public/lib/lodash/lodash.min.js',
@@ -25,7 +27,9 @@ module.exports = {
                 'public/lib/angular-sanitize/angular-sanitize.js',
                 'public/lib/angular-ui-router/release/angular-ui-router.js',
                 'public/lib/angular-ui-utils/ui-utils.js',
-                'public/lib/angular-bootstrap/ui-bootstrap-tpls.js'
+                'public/lib/angular-ui-utils/ui-utils.js',
+                'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+                'public/lib/angular-ui-select/dist/select.js'
             ]
         },
         css: [

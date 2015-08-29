@@ -1,3 +1,13 @@
-<section data-ng-controller="MoviesController">
-	N
+<section data-ng-controller="MoviesController" ng-init="getAllUsers()">
+	<div class="pull-right white-box" data-ng-show="((authentication.user) && (authentication.user._id == movie.user._id))">
+		<form class="form-inline">
+			<ui-select ng-model="controller.region" theme="select2" style="width: 100%;" on-select="controller.getData()">
+				<ui-select-match placeholder="Select a user ...">{{$select.selected.name}}</ui-select-match>
+				<ui-select-choices repeat="region in controller.regions | propsFilter: {name:$select.search}" >
+					<span ng-bind-html="region.name | highlight: $select.search"></span>
+				</ui-select-choices>
+			</ui-select>
+		</form>
+	</div>
+
 </section>

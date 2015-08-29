@@ -16,7 +16,8 @@
     "angular-ui-router": "~0.2.11",
     "underscore": "~1.8.3",
     "lodash": "~3.8.0",
-    "ui-select": "*"
+    "ui-select": "*",
+    "angular-ui-select": "~0.12.1"
   },
   "resolutions": {
     "angular": "~1.2"

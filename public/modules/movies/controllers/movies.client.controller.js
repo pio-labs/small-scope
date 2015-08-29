@@ -2,8 +2,8 @@
 
 // Movies controller
 angular.module('movies').controller('MoviesController',
-	['$scope', '$stateParams', '$location', '$sce', 'MovieFields', 'Authentication', 'Movies', 'MovieVotes', '$state',
-		function ($scope, $stateParams, $location, $sce, MovieFields, Authentication, Movies, MovieVotes, $state) {
+	['$scope', '$stateParams', '$location', '$sce', 'MovieFields', 'Authentication', 'Movies', 'MovieVotes', '$state', 'Users',
+		function ($scope, $stateParams, $location, $sce, MovieFields, Authentication, Movies, MovieVotes, $state, Users) {
 			$scope.authentication = Authentication;
 
 			// Create new Movie
@@ -64,6 +64,7 @@ angular.module('movies').controller('MoviesController',
 			};
 
 			$scope.getDescription = function (movie) {
+				movie = movie || $scope.movie;
 				return movie.description || movie.youtubeDetails.snippet.description;
 			};
 
@@ -120,8 +121,10 @@ angular.module('movies').controller('MoviesController',
 				} else {
 					$state.go('signin', {});
 				}
-
 			};
 
+			$scope.getAllUsers = function(){
+				$scope.users = Users.query();
+			}
 		}
 	]);

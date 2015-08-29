@@ -9,8 +9,7 @@ var mongoose = require('mongoose'),
 
 var MovieCrewSchema = new Schema({
     role: schemaTypes.STRING,
-    name: schemaTypes.STRING,
-    //user: modelReferences.USER,
+    user: modelReferences.USER,
     rolePriority: schemaTypes.NUMBER
 });
 

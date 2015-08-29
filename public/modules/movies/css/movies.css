@@ -54,7 +54,7 @@
 
 .voting-section {
     float: left;
-    width: 8%;
+    width: 7%;
     min-width: 70px;
     max-width: 120px;
     margin-top: 50px;
@@ -65,6 +65,10 @@
     margin-bottom: 15px;
 }
 
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
 .hr-bottom{
     border-bottom: 1px solid #ccc;
 }
@@ -73,3 +77,10 @@
     border-top: 1px solid #ccc;
 }
 
+.white-box{
+    border-radius: 3px;
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+}
