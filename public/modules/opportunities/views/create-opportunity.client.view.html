@@ -15,8 +15,8 @@
                 <!-- Text input-->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="title">Title</label>
-                    <div class="col-md-5">
-                        <input id="title" name="title" data-ng-model="title" type="text" placeholder="Title" class="form-control input-md" required="">
+                    <div class="col-md-4">
+                        <input id="title" name="title" data-ng-model="opportunity.title" type="text" placeholder="Title" class="form-control input-md" required="">
 
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="summary">summary</label>
                     <div class="col-md-4">
-                        <textarea class="form-control" data-ng-model="summary" id="summary" name="summary">summary</textarea>
+                        <textarea class="form-control" data-ng-model="opportunity.summary" id="summary" name="summary">summary</textarea>
                     </div>
                 </div>
 
@@ -33,26 +33,24 @@
                <div class="form-group">
                     <label class="col-md-4 control-label" for="roles">Roles</label>
                     <div class="col-md-4">
-                        <ui-select multiple id="roles" name="roles" data-ng-model="roles" >
-                            <ui-select-match placeholder="Select a user ...">{{$select.selected}}
-                            </ui-select-match>
-                            <ui-select-choices repeat="role in metaInfo.crewTypes">
-                                <span ng-bind-html="role | highlight: $select.search"></span>
-                            </ui-select-choices>
-                        </ui-select>
+                        <select multiple="true" id="roles" name="roles" data-ng-model="opportunity.requiredRoles" ng-options=" role for role in metaInfo.crewTypes" class="form-control input-md">
+
+                        </select>
                     </div>
                 </div>
 
                 <!-- Select Basic -->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="project">project</label>
-                    <ui-select id="project" theme="select2"  data-ng-model="project" name="project" class="col-md-4" >
+                    <div class="col-md-4">
+                    <ui-select id="project" theme="select2"  data-ng-model="opportunity.project" name="project" style="width: 100%" >
                         <ui-select-match>{{$select.selected.title}}
                         </ui-select-match>
                         <ui-select-choices repeat="project in userProjects">
                             <span ng-bind-html="project.title | highlight: $select.search"></span>
                         </ui-select-choices>
                     </ui-select>
+                    </div>
                 </div>
 
 
@@ -60,7 +58,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="location">location</label>
                     <div class="col-md-4">
-                        <input id="location" name="location" data-ng-model="location" type="text" placeholder="location" class="form-control input-md" required="">
+                        <input id="location" name="location" data-ng-model="opportunity.location" type="text" placeholder="location" class="form-control input-md" required="">
 
                     </div>
                 </div>
@@ -69,7 +67,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="Valid Till">Valid Till</label>
                     <div class="col-md-4">
-                        <input id="Valid Till" name="Valid Till" type="date" placeholder="Valid Till" class="form-control input-md">
+                        <input id="Valid Till" name="Valid Till" data-ng-model="opportunity.validTill" type="date" placeholder="Valid Till" class="form-control input-md">
                     </div>
                 </div>
 
