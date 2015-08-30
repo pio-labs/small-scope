@@ -15,7 +15,7 @@ var MovieCrewSchema = new Schema({
 
 var MovieSchema = new Schema({
     title: schemaTypes.STRING,
-    description: schemaTypes.STRING,
+    description: schemaTypes.OPTIONAL_STRING,
     user: modelReferences.USER,
 
     code :{

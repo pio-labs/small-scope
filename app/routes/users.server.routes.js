@@ -10,8 +10,10 @@ module.exports = function(app) {
 	var users = require('../../app/controllers/users.server.controller');
 
 	// Setting up the users profile api
-	app.route('/users/me').get(users.me);
+	app.route('/users/me').get(users.requiresLogin, users.me);
 	app.route('/users').put(users.update).get(users.requiresLogin, users.getAll);
+	app.route('/api/users/:userId').get(users.requiresLogin, users.getUserById);
+
 	app.route('/users/accounts').delete(users.removeOAuthProvider);
 
 	// Setting up the users password api

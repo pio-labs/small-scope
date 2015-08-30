@@ -179,7 +179,7 @@ exports.movieByID = function (req, res, next, id) {
  * Movie authorization middleware
  */
 exports.hasAuthorization = function (req, res, next) {
-	if (req.movie.user.id !== req.user.id) {
+	if (req.movie.user._id.toString() !== req.user._id.toString()) {
 		return res.status(403).send('User is not authorized');
 	}
 	next();
@@ -217,7 +217,7 @@ exports.metaInfo = function (req, res, next) {
 };
 
 exports.getMoviesOfUser = function (req, res, next) {
-	Movie.find({"created.user": req.user._id}).select('title description tags youtubeDetails releaseDate').exec(function (err, movies) {
+	Movie.find({"crew.user": req.params.userId}).select('title description tags youtubeDetails releaseDate').exec(function (err, movies) {
 		if(err){
 			return next(err);
 		}

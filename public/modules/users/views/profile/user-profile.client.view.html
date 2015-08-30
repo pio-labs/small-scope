@@ -1,3 +1,49 @@
-<section data-ng-controller="UserProfileController" data-ng-init="findOne()">
+<section data-ng-controller="UserProfileController" data-ng-init="init()">
+	<section class="left-section col-sm-4">
+		<div class="white-box">
+			<img ng-src="https://pbs.twimg.com/profile_images/1597585374/Profile_Pic.JPG" class="img-responsive"/>
+			<h3 ng-bind="user.displayName"></h3>
+		</div>
+		<div class="white-box-panel">
+			<div class="header"> Contact </div>
+			<div class="body padded">
+				<table class="table">
+					<tr ng-repeat="info in contactDetails">
+						<td width="35%" ng-bind="info.name"></td>
+						<td><a ng-href="{{trustSrc(getLink(info))}}">{{info.value}}</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</section>
 
+	<section class="right-section col-sm-8" >
+		<section class="white-box-panel">
+			<div class="header">
+				About {{user.displayName}}
+			</div>
+			<div class="body padded">
+				<div ng-bind="user.summary"></div>
+			</div>
+		</section>
+
+		<section class="white-box-panel">
+			<div class="header">
+				Movies Worked
+			</div>
+			<div class="body">
+				<div ng-repeat="movie in movies" class="clearfix margin-bottom-10">
+					<div class="col-sm-4">
+						<a data-ng-href="#!/movies/{{movie._id}}" class="thumb img-responsive ">
+							<img data-ng-src="{{getThumbnail(movie)}}" alt="" class="img-responsive"/>
+						</a>
+					</div>
+					<div class="col-sm-8">
+						<h3 ng-bind="movie.title"></h3>
+						<p ng-bind="getDescription(movie) | limitTo:175"></p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</section>
 </section>

@@ -4,8 +4,10 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+	_ = require('lodash'),
 	Schema = mongoose.Schema,
-	crypto = require('crypto');
+	crypto = require('crypto'),
+	schemaTypes = require('../utils/schema-types');
 
 /**
  * A Validation function for local strategy properties
@@ -54,6 +56,7 @@ var UserSchema = new Schema({
 		required: 'Please fill in a username',
 		trim: true
 	},
+	summary: schemaTypes.OPTIONAL_STRING,
 	password: {
 		type: String,
 		default: '',
@@ -121,6 +124,15 @@ UserSchema.methods.hashPassword = function(password) {
 UserSchema.methods.authenticate = function(password) {
 	return this.password === this.hashPassword(password);
 };
+
+/**
+ *
+ */
+var privateFields = ['__v', '_id', 'salt', 'provider', 'password', 'resetPasswordToken', 'resetPasswordExpires'];
+UserSchema.methods.getPublicDetails = function(){
+	return _.pick(this, ['firstName', 'lastName', 'displayName', 'email',  'summary']);
+};
+
 
 /**
  * Find possible not used username

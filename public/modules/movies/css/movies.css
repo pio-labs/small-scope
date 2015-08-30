@@ -65,6 +65,9 @@
     margin-bottom: 15px;
 }
 
+.margin-bottom-10 {
+    margin-bottom: 20px;
+}
 .margin-bottom-20 {
     margin-bottom: 20px;
 }
@@ -77,10 +80,27 @@
     border-top: 1px solid #ccc;
 }
 
-.white-box{
+.white-box-panel, .white-box{
     border-radius: 3px;
     background-color: #fff;
     padding: 15px;
     border: 1px solid #ddd;
     margin-bottom: 15px;
+    position: relative;
+}
+
+.white-box-panel {
+    padding: 0;
+}
+
+.white-box-panel .header{
+    background: #1abc9c;
+    padding: 15px;
+    color: white;
+}
+.white-box-panel .body{
+    padding: 10px 0;
+}
+.white-box-panel .body.padded{
+    padding: 10px;
 }

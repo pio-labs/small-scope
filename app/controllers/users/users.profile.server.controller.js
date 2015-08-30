@@ -12,7 +12,7 @@ var _ = require('lodash'),
 /**
  * Update user details
  */
-exports.update = function(req, res) {
+exports.update = function (req, res) {
 	// Init Variables
 	var user = req.user;
 	var message = null;
@@ -26,13 +26,13 @@ exports.update = function(req, res) {
 		user.updated = Date.now();
 		user.displayName = user.firstName + ' ' + user.lastName;
 
-		user.save(function(err) {
+		user.save(function (err) {
 			if (err) {
 				return res.status(400).send({
 					message: errorHandler.getErrorMessage(err)
 				});
 			} else {
-				req.login(user, function(err) {
+				req.login(user, function (err) {
 					if (err) {
 						res.status(400).send(err);
 					} else {
@@ -51,34 +51,34 @@ exports.update = function(req, res) {
 /**
  * Send User
  */
-exports.me = function(req, res) {
+exports.me = function (req, res) {
 	res.json(req.user || null);
 };
 
-exports.getAll = function(req, res, next){
-	User.find({}).select('displayName').find(function(err, users){
-		if(err){
+exports.getAll = function (req, res, next) {
+	User.find({}).select('displayName').find(function (err, users) {
+		if (err) {
 			return next(err);
 		}
 		res.json(users);
 	});
 };
 
-exports.updatePreferences = function(req, res, next){
+exports.updatePreferences = function (req, res, next) {
 	// Init Variables
 	var user = req.user;
 
 	// For security measurement we remove the roles from the req.body object
 	var preferenceUpdates = {
-		genres : req.body.genres,
-		languages : req.body.languages,
+		genres: req.body.genres,
+		languages: req.body.languages,
 		like_documentaries: req.body.like_documentaries
 	};
 
 	if (user) {
 		user.preferences = preferenceUpdates;
-		user.save(function(err){
-			if(err){
+		user.save(function (err) {
+			if (err) {
 				return res.status(400).send({
 					message: errorHandler.getErrorMessage(err)
 				});
@@ -86,4 +86,13 @@ exports.updatePreferences = function(req, res, next){
 			res.json(user);
 		});
 	}
+};
+
+exports.getUserById = function (req, res, next) {
+	User.findById(req.params.userId).exec(function(err, user){
+		if(err){
+			return next(err);
+		}
+		res.json(user.getPublicDetails());
+	});
 };

@@ -67,7 +67,8 @@ angular.module('movies').controller('MoviesController',
 
 			$scope.getDescription = function (movie) {
 				movie = movie || $scope.movie;
-				return movie.description || movie.youtubeDetails.snippet.description;
+				if (!movie._id)return;
+				return movie.description || (movie.youtube_details || movie.youtubeDetails).snippet.description;
 			};
 
 			// Update existing Movie
@@ -98,6 +99,8 @@ angular.module('movies').controller('MoviesController',
 
 			// Find existing Movie
 			$scope.findOne = function (callback) {
+				callback = callback || function(){};
+
 				if($scope.movie && $scope.movie._id) return callback();
 
 				$scope.movie = Movies.get({
