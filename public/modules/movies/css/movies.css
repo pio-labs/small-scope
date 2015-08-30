@@ -104,3 +104,7 @@
 .white-box-panel .body.padded{
     padding: 10px;
 }
+
+table.table.no-border td{
+    border: 0;
+}

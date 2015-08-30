@@ -3,7 +3,7 @@
 function getModelReferenceField(modelName) {
 	return {
 		type: 'ObjectId',
-			ref: 'User'
+			ref: modelName
 	};
 }
 

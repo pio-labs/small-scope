@@ -2,7 +2,7 @@
     <div class="page-header">
         <h1>New Opportunity</h1>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-10 col-md-offset-1">
         <form class="form-horizontal" data-ng-submit="create()" novalidate>
             <fieldset>
                 <!--<div class="form-group">
@@ -15,7 +15,7 @@
                 <!-- Text input-->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="title">Title</label>
-                    <div class="col-md-4">
+                    <div class="col-md-8">
                         <input id="title" name="title" data-ng-model="opportunity.title" type="text" placeholder="Title" class="form-control input-md" required="">
 
                     </div>
@@ -24,7 +24,7 @@
                 <!-- Textarea -->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="summary">summary</label>
-                    <div class="col-md-4">
+                    <div class="col-md-8">
                         <textarea class="form-control" data-ng-model="opportunity.summary" id="summary" name="summary">summary</textarea>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                 <!-- Select Multiple -->
                <div class="form-group">
                     <label class="col-md-4 control-label" for="roles">Roles</label>
-                    <div class="col-md-4">
+                    <div class="col-md-8">
                         <select multiple="true" id="roles" name="roles" data-ng-model="opportunity.requiredRoles" ng-options=" role for role in metaInfo.crewTypes" class="form-control input-md">
 
                         </select>
@@ -42,7 +42,7 @@
                 <!-- Select Basic -->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="project">project</label>
-                    <div class="col-md-4">
+                    <div class="col-md-8">
                     <ui-select id="project" theme="select2"  data-ng-model="opportunity.project" name="project" style="width: 100%" >
                         <ui-select-match>{{$select.selected.title}}
                         </ui-select-match>
@@ -57,7 +57,7 @@
                 <!-- Text input-->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="location">location</label>
-                    <div class="col-md-4">
+                    <div class="col-md-8">
                         <input id="location" name="location" data-ng-model="opportunity.location" type="text" placeholder="location" class="form-control input-md" required="">
 
                     </div>
@@ -65,21 +65,19 @@
 
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="Valid Till">Valid Till</label>
-                    <div class="col-md-4">
-                        <input id="Valid Till" name="Valid Till" data-ng-model="opportunity.validTill" type="date" placeholder="Valid Till" class="form-control input-md">
+                    <label class="col-md-4 control-label" for="validTill">Valid Till</label>
+                    <div class="col-md-8">
+                        <input id="validTill" name="validTill" data-ng-model="opportunity.validTill" type="date" placeholder="Valid Till" class="form-control input-md">
                     </div>
                 </div>
 
 
-                <div class="form-group">
-                    <input type="submit" class="btn btn-default">
+                <div class="form-group clearfix">
+                    <input type="submit" class="btn btn-primary pull-right">
                 </div>
                 <div data-ng-show="error" class="text-danger">
                     <strong data-ng-bind="error"></strong>
                 </div>
-
-
 
             </fieldset>
         </form>

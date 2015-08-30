@@ -1,7 +1,4 @@
-<section data-ng-controller="OpportunitiesController" data-ng-init="findOne()">
-	<div class="page-header">
-		<h1 data-ng-bind="opportunity.title"></h1>
-	</div>
+<section data-ng-controller="OpportunitiesController" data-ng-init="initViewOpportunity()">
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == opportunity.user._id))">
 		<a class="btn btn-primary" href="/#!/opportunities/{{opportunity._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
@@ -10,12 +7,63 @@
 			<i class="glyphicon glyphicon-trash"></i>
 		</a>
 	</div>
-	<small>
-		<em class="text-muted">
-			Posted on
-			<span data-ng-bind="opportunity.created.date | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="opportunity.user.displayName"></span>
-		</em>
-	</small>
+	<div class="white-box">
+		<h3 data-ng-bind="opportunity.title" class="hr-bottom"></h3>
+		<table class="table no-border">
+			<tr>
+				<td><b>Project</b></td>
+				<td ng-bind="opportunity.project.title"></td>
+			</tr>
+			<tr>
+				<td><b>Summary</b></td>
+				<td ng-bind="opportunity.summary"></td>
+			</tr>
+			<tr>
+				<td><b>Roles</b></td>
+				<td>
+					<span ng-repeat="role in opportunity.requiredRoles">{{role | uppercase}}</span>
+				</td>
+			</tr>
+		</table>
+		<div class="clearfix" ng-if = "!hasApplied" data-ng-hide = "((authentication.user) && (authentication.user._id == opportunity.user._id))">
+			<a class="btn btn-primary pull-right" ng-click="apply()">Apply</a>
+		</div>
+	</div>
+
+	<div class="white-box" ng-if="hasApplied">
+		You have already applied to this opportunity
+		<a href="#!/applicants/{{myApplication._id}}/audition" class="btn btn-info">Start Audition</a>
+
+	</div>
+
+	<div class="white-box-panel">
+		<div class="header">
+			Applicants
+		</div>
+		<div class="body padded">
+			<table class="table table-bordered table-striped">
+				<thead>
+				<tr>
+					<th width="75px"></th>
+					<th>
+						Name
+					</th>
+					<th data-ng-show="((authentication.user) && (authentication.user._id == opportunity.user._id))">
+						Actions
+					</th>
+				</tr>
+				</thead>
+				<tr ng-repeat="record in applicants">
+					<td ng-bind="$index+1"></td>
+					<td>
+						<a href="#!/users/{{record.applicant._id}}" ng-bind="record.applicant.displayName"></a>
+					</td>
+					<td data-ng-show="((authentication.user) && (authentication.user._id == opportunity.user._id))">
+						<a href="#!/applicants/{{record._id}}/audition" class="btn btn-info">Start Audition</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
 </section>
