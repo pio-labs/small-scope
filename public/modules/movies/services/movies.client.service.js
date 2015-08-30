@@ -23,8 +23,8 @@ angular.module('movies').factory('Movies', ['$resource',
 	});
 }]).factory('MovieService', ['$http', function ($http) {
 	return {
-		getUserMovies: function (userId) {
-			return $http.get('/api/movies/user/' + userId);
+		getUserMovies : function(userId){
+			return $http.get('/movies/user/'+userId);
 		}
 	}
 }]);

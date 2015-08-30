@@ -5,63 +5,85 @@
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="create()" novalidate>
             <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="name">Title</label>
+                <!--<div class="form-group">
+                    <label class="control-label" for="title">Name</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="opportunity.title" id="name" class="form-control" placeholder="Title" required>
+                        <input type="text" data-ng-model="title" id="title" class="form-control input-md" placeholder="Title" required>
                     </div>
                 </div>
+]-->
+                <!-- Text input-->
                 <div class="form-group">
-                    <label class="control-label" for="description">Description</label>
-                    <div class="controls">
-                        <textarea data-ng-model="opportunity.description" id="description" class="form-control" placeholder="Description" required></textarea>
+                    <label class="col-md-4 control-label" for="title">Title</label>
+                    <div class="col-md-5">
+                        <input id="title" name="title" data-ng-model="title" type="text" placeholder="Title" class="form-control input-md" required="">
+
                     </div>
                 </div>
-                <!-- Can make a directive for iterating-->
+
+                <!-- Textarea -->
                 <div class="form-group">
-                    <label class="control-label" for="phone">Phone</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="opportunity.phone" id="phone" class="form-control" placeholder="Phone" required>
+                    <label class="col-md-4 control-label" for="summary">summary</label>
+                    <div class="col-md-4">
+                        <textarea class="form-control" data-ng-model="summary" id="summary" name="summary">summary</textarea>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label" for="contact-person">Contact Person</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="opportunity.contact_person" id="contact-person" class="form-control" placeholder="Contact Person Name" required>
+
+                <!-- Select Multiple -->
+               <div class="form-group">
+                    <label class="col-md-4 control-label" for="roles">Roles</label>
+                    <div class="col-md-4">
+                        <ui-select multiple id="roles" name="roles" data-ng-model="roles" >
+                            <ui-select-match placeholder="Select a user ...">{{$select.selected}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="role in metaInfo.crewTypes">
+                                <span ng-bind-html="role | highlight: $select.search"></span>
+                            </ui-select-choices>
+                        </ui-select>
                     </div>
                 </div>
+
+                <!-- Select Basic -->
                 <div class="form-group">
-                    <label class="control-label" for="email">Email</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="opportunity.email" id="email" class="form-control" placeholder="Email" required>
+                    <label class="col-md-4 control-label" for="project">project</label>
+                    <ui-select id="project" theme="select2"  data-ng-model="project" name="project" class="col-md-4" >
+                        <ui-select-match>{{$select.selected.title}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="project in userProjects">
+                            <span ng-bind-html="project.title | highlight: $select.search"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="location">location</label>
+                    <div class="col-md-4">
+                        <input id="location" name="location" data-ng-model="location" type="text" placeholder="location" class="form-control input-md" required="">
+
                     </div>
                 </div>
+
+                <!-- Text input-->
                 <div class="form-group">
-                    <label class="control-label" for="website">Website</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="opportunity.website" id="website" class="form-control" placeholder="Website" required>
+                    <label class="col-md-4 control-label" for="Valid Till">Valid Till</label>
+                    <div class="col-md-4">
+                        <input id="Valid Till" name="Valid Till" type="date" placeholder="Valid Till" class="form-control input-md">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label" for="location">Location</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="opportunity.location" id="location" class="form-control" placeholder="Location" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="created">Created</label>
-                    <div class="controls">
-                        <input type="date" data-ng-model="opportunity.created" id="created" class="form-control" placeholder="Created" required>
-                    </div>
-                </div>
+
+
                 <div class="form-group">
                     <input type="submit" class="btn btn-default">
                 </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
+                <div data-ng-show="error" class="text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
+
+
+
             </fieldset>
         </form>
     </div>
-    <div class="clearfix"></div>
 </section>

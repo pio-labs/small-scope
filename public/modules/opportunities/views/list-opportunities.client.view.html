@@ -4,14 +4,13 @@
     </div>
     <div class="list-group">
         <a data-ng-repeat="opportunity in opportunities" data-ng-href="#!/opportunities/{{opportunity._id}}" class="list-group-item">
-                <h4 class="list-group-item-heading" data-ng-bind="opportunity.title"></h4>
-                <small class="list-group-item-text">
+			<small class="list-group-item-text">
 				Posted on
-				<span data-ng-bind="opportunity.created | date:'MMM dd, yyyy'"></span>
+				<span data-ng-bind="opportunity.created | date:'medium'"></span>
 				by
-				<span data-ng-bind="opportunity.contact_person"></span>
+				<span data-ng-bind="opportunity.user.displayName"></span>
 			</small>
-
+			<h4 class="list-group-item-heading" data-ng-bind="opportunity.name"></h4>
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!opportunities.$resolved || opportunities.length">

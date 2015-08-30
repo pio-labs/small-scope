@@ -88,7 +88,7 @@ exports.list = function(req, res) {
  * Opportunity middleware
  */
 exports.opportunityByID = function(req, res, next, id) { 
-	Opportunity.findById(id).populate('user', 'displayName').populate('roles', 'name').exec(function(err, opportunity) {
+	Opportunity.findById(id).populate('user', 'displayName').exec(function(err, opportunity) {
 		if (err) return next(err);
 		if (! opportunity) return next(new Error('Failed to load Opportunity ' + id));
 		req.opportunity = opportunity ;

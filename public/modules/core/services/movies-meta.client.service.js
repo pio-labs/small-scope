@@ -1,34 +1,46 @@
 'use strict';
 
 //Menu service used for managing  menus
-angular.module('core').service('movies-meta', ['$http',function($http){
+angular.module('core').service('MoviesMeta', ['$http', function ($http) {
     var metadata;
     var languages;
+    var roles;
     var genres;
-    var getMoviesMetaInfo=function(callback){
-        if(metadata) {callback(metadata); return;}
-        $http.get('/api/movies/metadata',function(data,status,headers,config){
-            metadata= data;
-            languages=data.languages;
-            genres=data.genres;
-            callback(metadata);
-        });
+
+    this.getMoviesMetaInfo = function (callback) {
+        if(metadata){
+            return callback(null, metadata);
+        }
+         $http.get('/api/movies/fields')
+             .then(function(resp){
+                 metadata=resp.data;
+                 roles=metadata.roles;
+                 languages=metadata.languages;
+                 genres= metadata.genres;
+                 callback(null, metadata);
+             })
+             .catch(function(err){
+                 callback(err, null);
+             })
     };
-    var getLanguages=function(callback){
-        if(languages){ callback(languages) ; return ;}
-        $http.get('/api/languages',function(data,status,headers,config){
-            languages=data;
+    this.getLanguages = function (callback) {
+        if (languages) {
+            return callback(languages);
+        }
+        $http.get('/api/languages', function (data, status, headers, config) {
+            languages = data;
             callback(languages);
         });
     };
 
-    var getGenres=function(callback){
-        if(genres){
+
+    this.getGenres = function (callback) {
+        if (genres) {
             callback(genres);
             return;
         }
-        $http.get('/api/genres',function(data,status,headers,config){
-            genres=data;
+        $http.get('/api/genres', function (data, status, headers, config) {
+            genres = data;
             callback(genres);
         });
     };

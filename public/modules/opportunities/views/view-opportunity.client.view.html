@@ -1,12 +1,6 @@
 <section data-ng-controller="OpportunitiesController" data-ng-init="findOne()">
 	<div class="page-header">
-		<h1 data-ng-bind="opportunity.title"></h1>
-	</div>
-	<div class="page-content">
-		<div data-ng-bind="opportunity.description"></div>
-		<div data-ng-bind="opportunity.location"></div>
-		<div data-ng-bind="opportunity.phone"></div>
-		<div data-ng-bind="opportunity.email"></div>
+		<h1 data-ng-bind="opportunity.name"></h1>
 	</div>
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == opportunity.user._id))">
 		<a class="btn btn-primary" href="/#!/opportunities/{{opportunity._id}}/edit">
@@ -21,7 +15,7 @@
 			Posted on
 			<span data-ng-bind="opportunity.created | date:'mediumDate'"></span>
 			by
-			<span data-ng-bind="opportunity.contact_person"></span>
+			<span data-ng-bind="opportunity.user.displayName"></span>
 		</em>
 	</small>
 </section>
