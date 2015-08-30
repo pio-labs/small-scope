@@ -1,11 +1,12 @@
 'use strict';
 
 // Opportunities controller
-angular.module('opportunities').controller('OpportunitiesController', ['$scope', '$stateParams', '$state', 'Authentication', 'Opportunities', 'MoviesMeta','MovieService',
-    function ($scope, $stateParams, $state, Authentication, Opportunities, MoviesMeta,MovieService) {
+angular.module('opportunities').controller('OpportunitiesController', ['$scope', '$stateParams', '$location' ,'$state', 'Authentication', 'Opportunities', 'MoviesMeta','MovieService',
+    function ($scope, $stateParams, $location,$state, Authentication, Opportunities, MoviesMeta,MovieService) {
         $scope.authentication = Authentication;
         $scope.userProjects=[];
         $scope.metaInfo={crewTypes: []};
+        $scope.opportunity={};
         if(!Authentication.user){
             return $state.go('signin');
         }
@@ -22,9 +23,7 @@ angular.module('opportunities').controller('OpportunitiesController', ['$scope',
         // Create new Opportunity
         $scope.create = function () {
             // Create new Opportunity object
-            var opportunity = new Opportunities({
-                name: this.name
-            });
+            var opportunity = new Opportunities($scope.opportunity);
 
             // Redirect after save
             opportunity.$save(function (response) {
@@ -74,7 +73,11 @@ angular.module('opportunities').controller('OpportunitiesController', ['$scope',
         $scope.findOne = function () {
             $scope.opportunity = Opportunities.get({
                 opportunityId: $stateParams.opportunityId
+            },function(){
+                var roles=[];
+                console.log($scope.opportunity);
             });
+            console.log($scope.opportunity);
         };
     }
 ]);

@@ -25,7 +25,7 @@ var OpportunitySchema = new Schema({
     },
     project: modelReferences.MOVIE,
     requiredRoles: [
-        {type: schemaTypes.OPTIONAL_STRING}
+        {type : String}
     ],
     location: schemaTypes.STRING,
     summary: schemaTypes.STRING,

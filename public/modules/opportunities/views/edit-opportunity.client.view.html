@@ -6,17 +6,70 @@
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
             <fieldset>
                 <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="opportunity.name" id="name" class="form-control" placeholder="Name" required>
+                    <label class="col-md-4 control-label" for="title">Title</label>
+                    <div class="col-md-4">
+                        <input id="title" name="title" data-ng-model="opportunity.title" type="text" placeholder="Title" class="form-control input-md" required="">
+
                     </div>
                 </div>
+
+                <!-- Textarea -->
                 <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-default">
+                    <label class="col-md-4 control-label" for="summary">summary</label>
+                    <div class="col-md-4">
+                        <textarea class="form-control" data-ng-model="opportunity.summary" id="summary" name="summary">summary</textarea>
+                    </div>
                 </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
+
+                <!-- Select Multiple -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="roles">Roles</label>
+                    <div class="col-md-4">
+                        <select multiple="true" id="roles" name="roles" data-ng-model="opportunity.requiredRoles" ng-options=" role for role in metaInfo.crewTypes" class="form-control input-md" >
+
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Select Basic -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="project">project</label>
+                    <div class="col-md-4">
+                        <ui-select id="project" theme="select2"  data-ng-model="opportunity.project" name="project" style="width: 100%" >
+                            <ui-select-match>{{$select.selected.title}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="project in userProjects">
+                                <span ng-bind-html="project.title | highlight: $select.search"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="location">location</label>
+                    <div class="col-md-4">
+                        <input id="location" name="location" data-ng-model="opportunity.location" type="text" placeholder="location" class="form-control input-md" required="">
+
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="Valid Till">Valid Till</label>
+                    <div class="col-md-4">
+                        <input id="Valid Till" name="Valid Till" data-ng-model="opportunity.validTill" type="date" placeholder="Valid Till" class="form-control input-md">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+                <div data-ng-show="error" class="text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
             </fieldset>
         </form>
     </div>
